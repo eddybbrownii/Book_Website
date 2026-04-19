@@ -3,13 +3,14 @@ function renderBooks (filter) {
   const books = getBooks ();
 
   if (filter === 'LOW_TO_HIGH') {
-    const filterBooks = books.sort (
-      (a, b) => a.originalPrice - b.originalPrice
+    books.sort (
+      (a, b) =>
+        (a.salePrice || a.originalPrice) - (b.originalPrice || b.salePrice)
     );
-    console.log (filterBooks);
   } else if (filter === 'HIGH_TO_LOW') {
-    const filterBooks = books.sort (
-      (a, b) => b.originalPrice - a.originalPrice
+    books.sort (
+      (a, b) =>
+        (b.salePrice || b.originalPrice) - (a.salePrice || a.originalPricePrice)
     );
   } else if (filter === 'RATING') {
     books.sort ((a, b) => b.rating - a.rating);
