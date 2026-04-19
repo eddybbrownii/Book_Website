@@ -1,6 +1,11 @@
-function renderBooks (filter) {
+let books;
+async function renderBooks (filter) {
   const booksWrapper = document.querySelector ('.books');
-  const books = getBooks ();
+  booksWrapper.classList += ' books__loading';
+  if (!books) {
+    books = await getBooks ();
+  }
+  booksWrapper.classList.remove (' books__loading');
 
   if (filter === 'LOW_TO_HIGH') {
     books.sort (
@@ -63,3 +68,11 @@ function filterBooks (event) {
 setTimeout (() => {
   renderBooks ();
 });
+
+function getBooks () {
+  return new Promise ((resolve, reject) => {
+    setTimeout (() => {
+      resolve (books);
+    }, 2000);
+  });
+}
